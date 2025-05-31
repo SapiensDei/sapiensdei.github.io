@@ -1,271 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Infinite Wisdom</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A minimalist scientific and philosophical site for sharing knowledge in multiple languages">
+  <title>حکمت بی‌نهایت | The Infinite Wisdom</title>
   <style>
-    :root {
-      --bg-color: #003a4d;
-      --text-color: #cce7e8;
-      --accent-color: #00707a;
-      --border-color: #005f66;
-      --modal-bg: rgba(0, 0, 0, 0.75);
-      --panel-bg: #004d5a;
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      line-height: 1.6;
-      font-size: 18px;
-      padding: 2rem 1rem;
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #0e2a2f;
+      color: #e0f7f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    header {
-      width: 100%;
-      max-width: 900px;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border-color);
-      text-align: center;
-      font-weight: 600;
-      font-size: 1.6rem;
-      letter-spacing: 0.05em;
-      user-select: none;
-      font-variant: small-caps;
-      margin-bottom: 2rem;
-    }
-    /* Button with Sauron eye style */
-    #sauronBtn {
-      background: radial-gradient(circle at center, #00707a, #003a4d);
-      border: 2px solid var(--accent-color);
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      cursor: pointer;
-      position: relative;
-      box-shadow: 0 0 10px var(--accent-color);
-      transition: transform 0.3s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-    #sauronBtn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px var(--accent-color);
-    }
-    /* Eye design inside the button */
-    #sauronBtn .eye {
-      position: relative;
-      width: 40px;
-      height: 20px;
-      background: #cce7e8;
-      border-radius: 50% / 100%;
-      overflow: hidden;
-      box-shadow: inset 0 0 5px #004d5a;
-    }
-    #sauronBtn .eye::before {
-      content: "";
-      position: absolute;
-      top: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 12px;
-      height: 12px;
-      background: var(--bg-color);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-color);
-    }
-    /* Modal background */
-    #modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--modal-bg);
-      backdrop-filter: blur(4px);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-    #modal.active {
-      display: flex;
-    }
-    /* Modal content container */
-    #modalContent {
-      background-color: var(--panel-bg);
-      padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 700px;
-      display: flex;
-      justify-content: space-between;
-      gap: 2rem;
-      box-shadow: 0 0 20px rgba(0, 112, 122, 0.5);
-      color: var(--text-color);
-      user-select: none;
-    }
-    /* Panels */
-    .panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .panel h3 {
-      margin-bottom: 1rem;
-      font-weight: 600;
-      text-align: center;
-      border-bottom: 1px solid var(--accent-color);
-      padding-bottom: 0.5rem;
-      letter-spacing: 0.05em;
-      font-variant: small-caps;
-    }
-    /* List styles */
-    ul {
-      list-style: none;
-    }
-    ul li {
-      margin-bottom: 0.7rem;
-      padding: 0.4rem 0.6rem;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: background-color 0.25s ease;
-      text-align: center;
-      font-weight: 500;
-      user-select: text;
-    }
-    ul li:hover,
-    ul li:focus {
-      background-color: var(--accent-color);
-      color: var(--bg-color);
-      outline: none;
-    }
-    /* Close button */
-    #closeBtn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      color: var(--accent-color);
-      font-size: 1.8rem;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s ease;
-    }
-    #closeBtn:hover {
-      color: #cce7e8;
+      padding: 40px 20px;
     }
 
-    /* Poem container */
-    #poem {
-      max-width: 900px;
-      margin-top: 2rem;
-      font-style: italic;
+    .header {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
       text-align: center;
-      line-height: 1.5;
-      font-size: 1.15rem;
-      white-space: pre-line;
-      user-select: text;
-      color: var(--text-color);
-      border-left: 4px solid var(--accent-color);
-      padding-left: 1rem;
-      font-weight: 400;
+    }
+
+    .language-selector {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .language-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .bigbang-icon {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at center, #00ffe1, #004643);
+      border-radius: 50%;
+      box-shadow: 0 0 20px #00ffe1;
+      transition: transform 0.3s ease;
+    }
+
+    .bigbang-icon:hover {
+      transform: scale(1.2) rotate(15deg);
+    }
+
+    .language-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background-color: #004643;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #003c37;
+    }
+
+    .language-menu a {
+      display: block;
+      color: #00ffe1;
+      text-decoration: none;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .poem {
+      white-space: pre-wrap;
+      max-width: 700px;
+      line-height: 1.8;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <header>The Infinite Wisdom That Shapes Everything</header>
-
-  <button id="sauronBtn" aria-label="Open categories menu" title="Open categories menu">
-    <div class="eye"></div>
-  </button>
-
-  <div id="poem">
-Truth  
-Is neither color nor scent,  
-Neither breath nor sound.  
-Neither this, nor that,  
-Neither cup nor jar.  
-
-If you reach this point,  
-I will tell you quietly, behind the veil,  
-So no one else hears this precious secret of the world:  
-
-What they said is but a watery reflection.  
-If you go unaware of the tavern's trials,  
-You are mistaken, do not go,  
-Do not return—  
-For both he who is lost and this one do.  
-
-Look at the sky,  
-How calm, majestic, and tall  
-It gazes at the earth.  
-
-You too, remain calm,  
-Do not be anxious,  
-And do not ask about the world's end.
-  </div>
-
-  <!-- Modal -->
-  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
-    <div id="modalContent">
-      <button id="closeBtn" aria-label="Close categories menu">&times;</button>
-      <div class="panel" aria-labelledby="engineeringTitle" role="region" tabindex="0">
-        <h3 id="engineeringTitle">Engineering Fields</h3>
-        <ul>
-          <li tabindex="0">Mechanical Engineering</li>
-          <li tabindex="0">Chemical Engineering</li>
-        </ul>
-      </div>
-      <div class="panel" aria-labelledby="scienceTitle" role="region" tabindex="0">
-        <h3 id="scienceTitle">Basic Sciences</h3>
-        <ul>
-          <li tabindex="0">Mathematics</li>
-          <li tabindex="0">Physics</li>
-          <li tabindex="0">Chemistry</li>
-        </ul>
-      </div>
+  <div class="language-selector">
+    <button class="language-button" onclick="toggleMenu()">
+      <div class="bigbang-icon"></div>
+    </button>
+    <div id="languageMenu" class="language-menu">
+      <a href="index.html">فارسی</a>
+      <a href="en.html">English</a>
     </div>
   </div>
 
+  <div class="header">The Infinite Wisdom That Shapes Everything</div>
+
+  <div class="poem">
+    حقیقت <br>
+    نه به رنگ است و نه بو<br>
+    نه به های است و نه هو<br>
+    نه به این است و نه او<br>
+    نه به جام است و سبو<br>
+    گر به این نقطه رسیدی<br>
+    به تو سربسته و درپرده بگویم<br>
+    تا کسی نشنود این راز گهربار جهان<br>
+    آنچه گفتند به جز نقش برآب نیست<br>
+    راه اگر بی خبر از فتنه خمخانه‌گی‌ات<br>
+    به خطا رفته، مرو<br>
+    باز مگرد<br>
+    که هم او گمشده دارد، هم این<br>
+    آسمان را بنگر،<br>
+    که چه آرام و پر ابهت و بلند<br>
+    به زمین می‌نگرد<br>
+    تو هم آرام بمان<br>
+    نگران منشین<br>
+    و مپرس از سرانجام جهان
+  </div>
+
   <script>
-    const sauronBtn = document.getElementById("sauronBtn");
-    const modal = document.getElementById("modal");
-    const closeBtn = document.getElementById("closeBtn");
-
-    sauronBtn.addEventListener("click", () => {
-      modal.classList.add("active");
-      modal.focus();
-    });
-
-    closeBtn.addEventListener("click", () => {
-      modal.classList.remove("active");
-      sauronBtn.focus();
-    });
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("active");
-        sauronBtn.focus();
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("active")) {
-        modal.classList.remove("active");
-        sauronBtn.focus();
-      }
-    });
+    function toggleMenu() {
+      const menu = document.getElementById('languageMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
   </script>
 </body>
 </html>
