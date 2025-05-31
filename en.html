@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A minimalist scientific and philosophical site for sharing knowledge in multiple languages">
+  <title>The Infinite Wisdom</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #0e2a2f;
+      color: #e0f7f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .header {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .language-selector {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .language-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .bigbang-icon {
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at center, #00ffe1, #004643);
+      border-radius: 50%;
+      box-shadow: 0 0 20px #00ffe1;
+      transition: transform 0.3s ease;
+    }
+
+    .bigbang-icon:hover {
+      transform: scale(1.2) rotate(15deg);
+    }
+
+    .language-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background-color: #004643;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #003c37;
+    }
+
+    .language-menu a {
+      display: block;
+      color: #00ffe1;
+      text-decoration: none;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .poem {
+      font-family: 'EB Garamond', serif;
+      white-space: pre-wrap;
+      max-width: 700px;
+      line-height: 1.8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="language-selector">
+    <button class="language-button" onclick="toggleMenu()">
+      <div class="bigbang-icon"></div>
+    </button>
+    <div id="languageMenu" class="language-menu">
+      <a href="index.html">فارسی</a>
+      <a href="en.html">English</a>
+    </div>
+  </div>
+
+  <div class="header">The Infinite Wisdom That Shapes Everything</div>
+
+  <div class="poem">
+    Truth<br>
+    Has no color, no scent<br>
+    Neither the echo of shout nor silence<br>
+    Neither this nor that<br>
+    Neither in the cup nor the wine<br><br>
+    If you've reached this point,<br>
+    Let me whisper in veils,<br>
+    So none may hear the precious secret of the world:<br>
+    What they said was but water’s shadow on stone<br><br>
+    If you’ve stepped unknowing into the chaos of the winehouse,<br>
+    Do not go further<br>
+    Do not turn back<br>
+    For both the seeker and the sought are lost.<br><br>
+    Look at the sky—
+    How solemn, how grand, how serene<br>
+    Gazing upon the earth<br><br>
+    So stay calm,
+    Do not worry
+    And do not ask of the world’s fate.
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('languageMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>
