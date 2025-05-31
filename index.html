@@ -165,6 +165,22 @@
     #closeBtn:hover {
       color: #cce7e8;
     }
+
+    /* Poem container */
+    #poem {
+      max-width: 900px;
+      margin-top: 2rem;
+      font-style: italic;
+      text-align: center;
+      line-height: 1.5;
+      font-size: 1.15rem;
+      white-space: pre-line;
+      user-select: text;
+      color: var(--text-color);
+      border-left: 4px solid var(--accent-color);
+      padding-left: 1rem;
+      font-weight: 400;
+    }
   </style>
 </head>
 <body>
@@ -173,6 +189,32 @@
   <button id="sauronBtn" aria-label="Open categories menu" title="Open categories menu">
     <div class="eye"></div>
   </button>
+
+  <div id="poem">
+Truth  
+Is neither color nor scent,  
+Neither breath nor sound.  
+Neither this, nor that,  
+Neither cup nor jar.  
+
+If you reach this point,  
+I will tell you quietly, behind the veil,  
+So no one else hears this precious secret of the world:  
+
+What they said is but a watery reflection.  
+If you go unaware of the tavern's trials,  
+You are mistaken, do not go,  
+Do not return—  
+For both he who is lost and this one do.  
+
+Look at the sky,  
+How calm, majestic, and tall  
+It gazes at the earth.  
+
+You too, remain calm,  
+Do not be anxious,  
+And do not ask about the world's end.
+  </div>
 
   <!-- Modal -->
   <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
@@ -201,20 +243,16 @@
     const modal = document.getElementById("modal");
     const closeBtn = document.getElementById("closeBtn");
 
-    // Open modal on button click
     sauronBtn.addEventListener("click", () => {
       modal.classList.add("active");
-      // Focus on modal for accessibility
       modal.focus();
     });
 
-    // Close modal on close button click
     closeBtn.addEventListener("click", () => {
       modal.classList.remove("active");
       sauronBtn.focus();
     });
 
-    // Close modal on outside click
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
         modal.classList.remove("active");
@@ -222,7 +260,6 @@
       }
     });
 
-    // Close modal on Escape key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modal.classList.contains("active")) {
         modal.classList.remove("active");
