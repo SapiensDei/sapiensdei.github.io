@@ -5,20 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Infinite Wisdom</title>
   <style>
-    /* Color palette: dark teal/blue-green */
     :root {
-      --bg-color: #003a4d; /* dark blue-green */
-      --text-color: #cce7e8; /* light teal */
-      --accent-color: #00707a; /* medium teal */
+      --bg-color: #003a4d;
+      --text-color: #cce7e8;
+      --accent-color: #00707a;
       --border-color: #005f66;
+      --modal-bg: rgba(0, 0, 0, 0.75);
+      --panel-bg: #004d5a;
     }
-    /* Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -32,7 +31,6 @@
       flex-direction: column;
       align-items: center;
     }
-
     header {
       width: 100%;
       max-width: 900px;
@@ -44,54 +42,193 @@
       letter-spacing: 0.05em;
       user-select: none;
       font-variant: small-caps;
+      margin-bottom: 2rem;
     }
-
-    main {
-      max-width: 900px;
-      width: 100%;
-      margin-top: 2rem;
-      /* content area */
+    /* Button with Sauron eye style */
+    #sauronBtn {
+      background: radial-gradient(circle at center, #00707a, #003a4d);
+      border: 2px solid var(--accent-color);
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 0 10px var(--accent-color);
+      transition: transform 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
     }
-
-    /* Links styling */
-    a {
-      color: var(--accent-color);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s ease;
+    #sauronBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--accent-color);
     }
-    a:hover,
-    a:focus {
+    /* Eye design inside the button */
+    #sauronBtn .eye {
+      position: relative;
+      width: 40px;
+      height: 20px;
+      background: #cce7e8;
+      border-radius: 50% / 100%;
+      overflow: hidden;
+      box-shadow: inset 0 0 5px #004d5a;
+    }
+    #sauronBtn .eye::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      background: var(--bg-color);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-color);
+    }
+    /* Modal background */
+    #modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--modal-bg);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    #modal.active {
+      display: flex;
+    }
+    /* Modal content container */
+    #modalContent {
+      background-color: var(--panel-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 700px;
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      box-shadow: 0 0 20px rgba(0, 112, 122, 0.5);
+      color: var(--text-color);
+      user-select: none;
+    }
+    /* Panels */
+    .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .panel h3 {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      text-align: center;
       border-bottom: 1px solid var(--accent-color);
+      padding-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+      font-variant: small-caps;
+    }
+    /* List styles */
+    ul {
+      list-style: none;
+    }
+    ul li {
+      margin-bottom: 0.7rem;
+      padding: 0.4rem 0.6rem;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.25s ease;
+      text-align: center;
+      font-weight: 500;
+      user-select: text;
+    }
+    ul li:hover,
+    ul li:focus {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
       outline: none;
     }
-
-    /* Simple container for file list or content */
-    .content-section {
-      background-color: #004d5a; /* slightly lighter dark teal */
-      padding: 1.5rem 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0, 112, 122, 0.2);
+    /* Close button */
+    #closeBtn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--accent-color);
+      font-size: 1.8rem;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
     }
-
-    /* Paragraph spacing */
-    p {
-      margin-bottom: 1rem;
+    #closeBtn:hover {
+      color: #cce7e8;
     }
   </style>
 </head>
 <body>
-  <header>
-    The Infinite Wisdom That Shapes Everything
-  </header>
-  <main>
-    <section class="content-section">
-      <!-- Example content -->
-      <p>Welcome to this space dedicated to those who live and breathe knowledge.</p>
-      <p>Here you will find curated scientific and philosophical materials to deepen your understanding and fuel your continuous journey.</p>
-      <!-- Add your content or file links here -->
-    </section>
-  </main>
+  <header>The Infinite Wisdom That Shapes Everything</header>
+
+  <button id="sauronBtn" aria-label="Open categories menu" title="Open categories menu">
+    <div class="eye"></div>
+  </button>
+
+  <!-- Modal -->
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div id="modalContent">
+      <button id="closeBtn" aria-label="Close categories menu">&times;</button>
+      <div class="panel" aria-labelledby="engineeringTitle" role="region" tabindex="0">
+        <h3 id="engineeringTitle">Engineering Fields</h3>
+        <ul>
+          <li tabindex="0">Mechanical Engineering</li>
+          <li tabindex="0">Chemical Engineering</li>
+        </ul>
+      </div>
+      <div class="panel" aria-labelledby="scienceTitle" role="region" tabindex="0">
+        <h3 id="scienceTitle">Basic Sciences</h3>
+        <ul>
+          <li tabindex="0">Mathematics</li>
+          <li tabindex="0">Physics</li>
+          <li tabindex="0">Chemistry</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sauronBtn = document.getElementById("sauronBtn");
+    const modal = document.getElementById("modal");
+    const closeBtn = document.getElementById("closeBtn");
+
+    // Open modal on button click
+    sauronBtn.addEventListener("click", () => {
+      modal.classList.add("active");
+      // Focus on modal for accessibility
+      modal.focus();
+    });
+
+    // Close modal on close button click
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+      sauronBtn.focus();
+    });
+
+    // Close modal on outside click
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+        sauronBtn.focus();
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("active")) {
+        modal.classList.remove("active");
+        sauronBtn.focus();
+      }
+    });
+  </script>
 </body>
 </html>
-
